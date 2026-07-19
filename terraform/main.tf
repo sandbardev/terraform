@@ -50,14 +50,14 @@ module "vpc" {
 # eks cluster
 module "eks" {
   source  = "terraform-aws-modules/eks/aws"
-  version = "20.8.5"
+  version = "20.31.6"
 
   cluster_name    = "main-eks-cluster"
   cluster_version = "1.29"
 
   cluster_endpoint_public_access           = true
   enable_cluster_creator_admin_permissions = true
-  cluster_endpoint_public_access_cidrs     = ["179.218.21.185"] # my IP
+  cluster_endpoint_public_access_cidrs     = ["179.218.21.185/32"] # my IP
   vpc_id                                   = module.vpc.vpc_id
   subnet_ids                               = module.vpc.private_subnets
 
@@ -79,5 +79,3 @@ module "eks" {
     }
   }
 }
-
-# TODO: allow gh actions to create necessary roles
