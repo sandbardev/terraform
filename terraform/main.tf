@@ -23,8 +23,8 @@ data "aws_availability_zones" "available" {
 
 # vpc
 module "vpc" {
-  source = "terraform-aws-modules/vpc/aws"
-  version = "5.8.1" 
+  source  = "terraform-aws-modules/vpc/aws"
+  version = "5.8.1"
 
   name = "main-vpc"
 
@@ -34,8 +34,8 @@ module "vpc" {
   private_subnets = ["10.0.1.0/24", "10.0.2.0/24", "10.0.3.0/24"]
   public_subnets  = ["10.0.4.0/24", "10.0.5.0/24", "10.0.6.0/24"]
 
-  enable_nat_gateway   = true
-  single_nat_gateway   = true
+  enable_nat_gateway = true
+  single_nat_gateway = true
 
   # config for using when setting up EKS cluster
   public_subnet_tags = {
@@ -57,9 +57,9 @@ module "eks" {
 
   cluster_endpoint_public_access           = true
   enable_cluster_creator_admin_permissions = true
-  cluster_endpoint_public_access_cidrs = ["179.218.21.185"] # my IP
-  vpc_id     = module.vpc.vpc_id
-  subnet_ids = module.vpc.private_subnets
+  cluster_endpoint_public_access_cidrs     = ["179.218.21.185"] # my IP
+  vpc_id                                   = module.vpc.vpc_id
+  subnet_ids                               = module.vpc.private_subnets
 
 
   eks_managed_node_group_defaults = {
