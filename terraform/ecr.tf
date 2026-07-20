@@ -12,7 +12,7 @@ resource "aws_ecr_repository" "payment_orchestration" {
 
   tags = {
     Name        = "payment-orchestration"
-    Environment = "${var.environment}"
+    Environment = "development"
   }
 }
 
